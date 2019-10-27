@@ -2,7 +2,7 @@ const {expect} = require("chai");
 const knex = require("knex");
 const app = require("../src/app");
 
-describe("Articles Endpoints", function() {
+describe.only("Articles Endpoints", function() {
   let db;
 
   before("make knex instance", () => {
@@ -57,11 +57,10 @@ describe("Articles Endpoints", function() {
       return db.into("blogful_articles").insert(testArticles);
     });
 
-    it("GET /aricles responds with 200 and all of the articles", () => {
+    it("GET /articles responds with 200 and all of the articles", () => {
       return supertest(app)
         .get("/articles")
-        .expect(200);
-      //TODO: add more assertions about the body
+        .expect(200, testArticles);
     });
   });
 });
